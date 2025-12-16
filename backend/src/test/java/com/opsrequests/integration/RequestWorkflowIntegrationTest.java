@@ -115,7 +115,7 @@ class RequestWorkflowIntegrationTest {
 
         RequestDetailResponse afterApproval = requestService.getRequestDetail(
                 createdRequest.getId(), employeePrincipal);
-        assertEquals(Status.APPROVED, afterApproval.getRequest().getStatus());
+        assertEquals(Status.APPROVED, afterApproval.getStatus());
         assertEquals(1, afterApproval.getComments().size());
         assertTrue(afterApproval.getAuditEvents().size() >= 2);
 
@@ -127,7 +127,7 @@ class RequestWorkflowIntegrationTest {
 
         RequestDetailResponse afterInProgress = requestService.getRequestDetail(
                 createdRequest.getId(), employeePrincipal);
-        assertEquals(Status.IN_PROGRESS, afterInProgress.getRequest().getStatus());
+        assertEquals(Status.IN_PROGRESS, afterInProgress.getStatus());
 
         ChangeStatusRequest changeToDone = new ChangeStatusRequest();
         changeToDone.setStatus(Status.DONE);
@@ -137,7 +137,7 @@ class RequestWorkflowIntegrationTest {
 
         RequestDetailResponse finalRequest = requestService.getRequestDetail(
                 createdRequest.getId(), employeePrincipal);
-        assertEquals(Status.DONE, finalRequest.getRequest().getStatus());
+        assertEquals(Status.DONE, finalRequest.getStatus());
         assertTrue(finalRequest.getAuditEvents().size() >= 4);
     }
 
@@ -158,7 +158,7 @@ class RequestWorkflowIntegrationTest {
 
         RequestDetailResponse rejectedRequest = requestService.getRequestDetail(
                 createdRequest.getId(), employeePrincipal);
-        assertEquals(Status.REJECTED, rejectedRequest.getRequest().getStatus());
+        assertEquals(Status.REJECTED, rejectedRequest.getStatus());
         assertEquals(1, rejectedRequest.getComments().size());
         assertEquals("Insufficient justification", rejectedRequest.getComments().get(0).getComment());
     }

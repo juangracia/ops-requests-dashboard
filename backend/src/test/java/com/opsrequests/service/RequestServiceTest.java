@@ -144,7 +144,7 @@ class RequestServiceTest {
     void getRequests_Employee_ReturnsOwnRequests() {
         when(requestRepository.findByRequesterId(1L)).thenReturn(List.of(request));
 
-        List<RequestResponse> responses = requestService.getRequests(employeePrincipal);
+        List<RequestResponse> responses = requestService.getRequests(employeePrincipal, null, null, null);
 
         assertNotNull(responses);
         assertEquals(1, responses.size());
