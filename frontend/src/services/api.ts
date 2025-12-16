@@ -49,7 +49,9 @@ class ApiService {
         if (typeof window !== 'undefined') {
           // Update baseURL dynamically in browser context
           if (!this.apiUrlResolved) {
-            this.api.defaults.baseURL = getApiUrl();
+            const browserApiUrl = getApiUrl();
+            this.api.defaults.baseURL = browserApiUrl;
+            config.baseURL = browserApiUrl;
             this.apiUrlResolved = true;
           }
           const token = localStorage.getItem('token');
