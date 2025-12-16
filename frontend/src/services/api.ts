@@ -32,14 +32,13 @@ const getApiUrl = (): string => {
   return 'http://localhost:38081/api';
 };
 
-const API_URL = getApiUrl();
-
 class ApiService {
   private api: AxiosInstance;
+  private apiUrlResolved = false;
 
   constructor() {
     this.api = axios.create({
-      baseURL: API_URL,
+      baseURL: getApiUrl(),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -48,6 +47,11 @@ class ApiService {
     this.api.interceptors.request.use(
       (config) => {
         if (typeof window !== 'undefined') {
+          // Update baseURL dynamically in browser context
+          if (!this.apiUrlResolved) {
+            this.api.defaults.baseURL = getApiUrl();
+            this.apiUrlResolved = true;
+          }
           const token = localStorage.getItem('token');
           if (token) {
             config.headers.Authorization = `Bearer ${token}`;
