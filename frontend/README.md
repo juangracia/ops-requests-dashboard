@@ -22,7 +22,7 @@ npm install
 Create a `.env.local` file:
 
 ```
-NEXT_PUBLIC_API_URL=http://localhost:28080/api
+NEXT_PUBLIC_API_URL=http://localhost:38081/api
 ```
 
 ### Development
@@ -31,7 +31,7 @@ NEXT_PUBLIC_API_URL=http://localhost:28080/api
 npm run dev
 ```
 
-The app will run on http://localhost:23000
+The app will run on http://localhost:33456
 
 ### Production Build
 
@@ -103,5 +103,5 @@ Build and run with Docker:
 
 ```bash
 docker build -t ops-requests-frontend .
-docker run -p 23000:23000 ops-requests-frontend
+docker run -p 33456:33456 ops-requests-frontend
 ```

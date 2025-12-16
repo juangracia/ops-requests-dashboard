@@ -26,9 +26,9 @@ The application can be configured using environment variables:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| SERVER_PORT | 28080 | Application server port |
+| SERVER_PORT | 38081 | Application server port |
 | DB_HOST | localhost | Database host |
-| DB_PORT | 25432 | Database port |
+| DB_PORT | 54329 | Database port |
 | DB_NAME | opsrequests | Database name |
 | DB_USER | postgres | Database username |
 | DB_PASSWORD | postgres | Database password |
@@ -60,7 +60,7 @@ mvn spring-boot:run
 ### With custom environment variables
 
 ```bash
-DB_HOST=localhost DB_PORT=25432 mvn spring-boot:run
+DB_HOST=localhost DB_PORT=54329 mvn spring-boot:run
 ```
 
 ## Building the Application
@@ -85,7 +85,7 @@ mvn test
 Once the application is running, access the Swagger UI at:
 
 ```
-http://localhost:28080/swagger-ui.html
+http://localhost:38081/swagger-ui.html
 ```
 
 ## Seed Data
@@ -147,7 +147,7 @@ Authorization: Bearer <token>
 ## CORS Configuration
 
 The backend is configured to accept requests from:
-- http://localhost:23000 (frontend)
+- http://localhost:33456 (frontend)
 
 ## Project Structure
 

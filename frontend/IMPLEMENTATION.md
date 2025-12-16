@@ -286,13 +286,13 @@ All types defined in `src/types/index.ts`:
 ### Environment Variables
 
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:28080/api
+NEXT_PUBLIC_API_URL=http://localhost:38081/api
 ```
 
 ### Port Configuration
 
-- Development: Port 23000
-- Production: Port 23000 (configurable via PORT env var)
+- Development: Port 33456
+- Production: Port 33456 (configurable via PORT env var)
 
 ### Next.js Config
 
@@ -320,7 +320,7 @@ npm start
 
 ```bash
 docker build -t ops-requests-frontend .
-docker run -p 23000:23000 ops-requests-frontend
+docker run -p 33456:33456 ops-requests-frontend
 ```
 
 ## Security Features

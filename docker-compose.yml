@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: ${DB_USER:-postgres}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
     ports:
-      - "${DB_PORT:-25432}:5432"
+      - "${DB_PORT:-54329}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -18,7 +18,7 @@ services:
   backend:
     build: ./backend
     ports:
-      - "${BACKEND_PORT:-28080}:8080"
+      - "${BACKEND_PORT:-38081}:8080"
     environment:
       SERVER_PORT: 8080
       DB_HOST: postgres
@@ -34,9 +34,9 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - "${FRONTEND_PORT:-23000}:3000"
+      - "${FRONTEND_PORT:-33456}:3000"
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:${BACKEND_PORT:-28080}/api
+      NEXT_PUBLIC_API_URL: http://localhost:${BACKEND_PORT:-38081}/api
     depends_on:
       - backend
 

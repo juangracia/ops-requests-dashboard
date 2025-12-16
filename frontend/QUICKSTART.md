@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - Node.js 20+ installed
-- Backend API running on http://localhost:28080
+- Backend API running on http://localhost:38081
 
 ## Setup
 
@@ -14,7 +14,7 @@ npm install
 
 2. Environment is already configured in `.env.local`:
 ```
-NEXT_PUBLIC_API_URL=http://localhost:28080/api
+NEXT_PUBLIC_API_URL=http://localhost:38081/api
 ```
 
 3. Start the development server:
@@ -22,12 +22,12 @@ NEXT_PUBLIC_API_URL=http://localhost:28080/api
 npm run dev
 ```
 
-4. Open http://localhost:23000 in your browser
+4. Open http://localhost:33456 in your browser
 
 ## First Steps
 
 ### 1. Register a New Account
-- Navigate to http://localhost:23000/register
+- Navigate to http://localhost:33456/register
 - Enter email and password
 - Click "Register"
 - You'll be automatically logged in and redirected
@@ -87,13 +87,13 @@ npm run lint
 
 # Docker build
 docker build -t ops-requests-frontend .
-docker run -p 23000:23000 ops-requests-frontend
+docker run -p 33456:33456 ops-requests-frontend
 ```
 
 ## Troubleshooting
 
 ### API Connection Issues
-- Verify backend is running on port 28080
+- Verify backend is running on port 38081
 - Check `.env.local` has correct API URL
 - Check browser console for CORS errors
 

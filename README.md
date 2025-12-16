@@ -74,7 +74,7 @@ This project demonstrates a complete, business-minded approach to building inter
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                        FRONTEND (Next.js)                       │
-│                         Port: 23000                             │
+│                         Port: 33456                             │
 │  ┌─────────┐  ┌──────────┐  ┌──────────┐  ┌─────────────────┐  │
 │  │  Login  │  │ Requests │  │ Approvals│  │  Admin Panel    │  │
 │  └─────────┘  └──────────┘  └──────────┘  └─────────────────┘  │
@@ -83,7 +83,7 @@ This project demonstrates a complete, business-minded approach to building inter
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                       BACKEND (Spring Boot)                     │
-│                         Port: 28080                             │
+│                         Port: 38081                             │
 │  ┌──────────────────────────────────────────────────────────┐  │
 │  │                    REST Controllers                       │  │
 │  │   AuthController │ RequestController │ AdminController    │  │
@@ -104,7 +104,7 @@ This project demonstrates a complete, business-minded approach to building inter
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                      PostgreSQL Database                        │
-│                         Port: 25432                             │
+│                         Port: 54329                             │
 │  ┌────────┐ ┌─────────────┐ ┌─────────┐ ┌───────────────────┐  │
 │  │ users  │ │request_types│ │requests │ │request_audit_events│  │
 │  └────────┘ └─────────────┘ └─────────┘ └───────────────────┘  │
@@ -168,9 +168,9 @@ This project demonstrates a complete, business-minded approach to building inter
    ```
 
 3. **Access the application**
-   - Frontend: http://localhost:23000
-   - Backend API: http://localhost:28080
-   - Swagger UI: http://localhost:28080/swagger-ui.html
+   - Frontend: http://localhost:33456
+   - Backend API: http://localhost:38081
+   - Swagger UI: http://localhost:38081/swagger-ui.html
 
 4. **Log in with demo credentials** (see below)
 
@@ -202,21 +202,21 @@ All services use configurable ports via environment variables:
 
 | Service | Default Port | Environment Variable |
 |---------|-------------|---------------------|
-| PostgreSQL | 25432 | `DB_PORT` |
-| Backend API | 28080 | `BACKEND_PORT` |
-| Frontend | 23000 | `FRONTEND_PORT` |
+| PostgreSQL | 54329 | `DB_PORT` |
+| Backend API | 38081 | `BACKEND_PORT` |
+| Frontend | 33456 | `FRONTEND_PORT` |
 
 ### Customizing Ports
 
 Create a `.env` file in the project root:
 
 ```env
-DB_PORT=25432
+DB_PORT=54329
 DB_NAME=opsrequests
 DB_USER=postgres
 DB_PASSWORD=postgres
-BACKEND_PORT=28080
-FRONTEND_PORT=23000
+BACKEND_PORT=38081
+FRONTEND_PORT=33456
 JWT_SECRET=your-256-bit-secret-key-here-must-be-at-least-32-chars-long
 ```
 
@@ -237,8 +237,8 @@ JWT_SECRET=your-256-bit-secret-key-here-must-be-at-least-32-chars-long
 ## API Documentation
 
 Interactive API documentation is available at:
-- **Swagger UI**: http://localhost:28080/swagger-ui.html
-- **OpenAPI Spec**: http://localhost:28080/v3/api-docs
+- **Swagger UI**: http://localhost:38081/swagger-ui.html
+- **OpenAPI Spec**: http://localhost:38081/v3/api-docs
 
 ### Key Endpoints
 

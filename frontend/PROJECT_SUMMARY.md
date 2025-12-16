@@ -12,7 +12,7 @@ All requirements have been successfully implemented for the Next.js frontend app
 - ✅ Tailwind CSS setup
 - ✅ ESLint configuration
 - ✅ Environment variables
-- ✅ Port 23000 configuration
+- ✅ Port 33456 configuration
 
 ### 2. Pages/Routes (App Router)
 - ✅ `/login` - Login page
@@ -109,7 +109,7 @@ All interfaces implemented:
 ### 11. Configuration
 - ✅ `next.config.js` with environment variables
 - ✅ Standalone output for Docker
-- ✅ Port 23000 (configurable via PORT env var)
+- ✅ Port 33456 (configurable via PORT env var)
 - ✅ Tailwind configuration
 - ✅ TypeScript configuration
 - ✅ ESLint configuration
@@ -117,7 +117,7 @@ All interfaces implemented:
 ### 12. Docker Support
 - ✅ Multi-stage Dockerfile
 - ✅ Production-ready build
-- ✅ Port 23000 exposed
+- ✅ Port 33456 exposed
 - ✅ Optimized image size
 
 ## File Statistics
@@ -237,10 +237,10 @@ The application is ready for:
 ## Environment Variables
 
 Required:
-- `NEXT_PUBLIC_API_URL` - Backend API URL (default: http://localhost:28080/api)
+- `NEXT_PUBLIC_API_URL` - Backend API URL (default: http://localhost:38081/api)
 
 Optional:
-- `PORT` - Server port (default: 23000)
+- `PORT` - Server port (default: 33456)
 
 ## Browser Support
 

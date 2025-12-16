@@ -143,7 +143,7 @@ Use this checklist to validate the frontend application is working correctly.
 
 ## Docker Validation
 - [ ] Docker build succeeds
-- [ ] Container runs on port 23000
+- [ ] Container runs on port 33456
 - [ ] Application accessible in container
 - [ ] Environment variables work in container
 

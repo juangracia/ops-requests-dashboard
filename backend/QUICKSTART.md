@@ -12,7 +12,7 @@
 ./start-db.sh
 ```
 
-This will start a PostgreSQL database in Docker on port 25432.
+This will start a PostgreSQL database in Docker on port 54329.
 
 ## Step 2: Run the Application
 
@@ -26,7 +26,7 @@ Or using Maven Wrapper:
 ```
 
 The application will:
-- Start on port 28080
+- Start on port 38081
 - Automatically run Flyway migrations
 - Seed the database with test data
 
@@ -36,14 +36,14 @@ The application will:
 
 Open your browser and navigate to:
 ```
-http://localhost:28080/swagger-ui.html
+http://localhost:38081/swagger-ui.html
 ```
 
 ### Option 2: Using curl
 
 #### Login as Admin
 ```bash
-curl -X POST http://localhost:28080/api/auth/login \
+curl -X POST http://localhost:38081/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "admin@example.com",
@@ -55,7 +55,7 @@ Save the token from the response.
 
 #### Get Requests (use the token)
 ```bash
-curl -X GET http://localhost:28080/api/requests \
+curl -X GET http://localhost:38081/api/requests \
   -H "Authorization: Bearer YOUR_TOKEN_HERE"
 ```
 
@@ -77,7 +77,7 @@ mvn test
 ## Troubleshooting
 
 ### Port Already in Use
-If port 28080 or 25432 is already in use, you can change them:
+If port 38081 or 54329 is already in use, you can change them:
 
 ```bash
 SERVER_PORT=8080 DB_PORT=5432 mvn spring-boot:run
@@ -110,7 +110,7 @@ For development with hot reload, use Spring Boot DevTools by adding it to your p
 ### View Database
 You can connect to the database using any PostgreSQL client:
 - Host: localhost
-- Port: 25432
+- Port: 54329
 - Database: opsrequests
 - User: postgres
 - Password: postgres

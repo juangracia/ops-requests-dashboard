@@ -31,16 +31,16 @@
 ## Database
 
 - **Host**: localhost
-- **Port**: 25432
+- **Port**: 54329
 - **Database**: opsrequests
 - **User**: postgres
 - **Password**: postgres
 
 ## API
 
-- **Base URL**: http://localhost:28080
-- **Swagger UI**: http://localhost:28080/swagger-ui.html
-- **API Docs**: http://localhost:28080/api-docs
+- **Base URL**: http://localhost:38081
+- **Swagger UI**: http://localhost:38081/swagger-ui.html
+- **API Docs**: http://localhost:38081/api-docs
 
 ## Request Types
 
