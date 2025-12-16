@@ -14,7 +14,25 @@ import {
   RequestFilters,
 } from '@/types';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:28080/api';
+const getApiUrl = (): string => {
+  // Check for environment variable first
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+
+  // Runtime detection for Railway deployment
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    if (hostname.includes('railway.app')) {
+      return 'https://backend-production-c3d3.up.railway.app/api';
+    }
+  }
+
+  // Default for local development
+  return 'http://localhost:38081/api';
+};
+
+const API_URL = getApiUrl();
 
 class ApiService {
   private api: AxiosInstance;
