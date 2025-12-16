@@ -1,0 +1,106 @@
+OPS REQUESTS BACKEND - PROJECT STRUCTURE
+=========================================
+
+backend/
+├── pom.xml                          # Maven configuration
+├── docker-compose.yml               # PostgreSQL database setup
+├── start-db.sh                      # Database startup script
+├── Dockerfile                       # Container build file
+├── .gitignore                       # Git ignore rules
+├── .env.example                     # Environment variables template
+├── README.md                        # Project documentation
+├── CREDENTIALS.md                   # Default credentials reference
+│
+└── src/
+    ├── main/
+    │   ├── java/com/opsrequests/
+    │   │   ├── OpsRequestsApplication.java
+    │   │   │
+    │   │   ├── config/
+    │   │   │   ├── SecurityConfig.java          # Security & CORS
+    │   │   │   └── OpenApiConfig.java           # Swagger/OpenAPI
+    │   │   │
+    │   │   ├── controller/
+    │   │   │   ├── AuthController.java          # /api/auth/**
+    │   │   │   ├── RequestController.java       # /api/requests/**
+    │   │   │   ├── RequestTypeController.java   # /api/request-types/**
+    │   │   │   └── UserController.java          # /api/users/**
+    │   │   │
+    │   │   ├── dto/
+    │   │   │   ├── request/
+    │   │   │   │   ├── LoginRequest.java
+    │   │   │   │   ├── RegisterRequest.java
+    │   │   │   │   ├── CreateRequestRequest.java
+    │   │   │   │   ├── UpdateRequestRequest.java
+    │   │   │   │   ├── ApproveRejectRequest.java
+    │   │   │   │   ├── ChangeStatusRequest.java
+    │   │   │   │   ├── AddCommentRequest.java
+    │   │   │   │   ├── CreateRequestTypeRequest.java
+    │   │   │   │   └── UpdateRequestTypeRequest.java
+    │   │   │   │
+    │   │   │   └── response/
+    │   │   │       ├── AuthResponse.java
+    │   │   │       ├── UserResponse.java
+    │   │   │       ├── RequestResponse.java
+    │   │   │       ├── RequestDetailResponse.java
+    │   │   │       ├── RequestTypeResponse.java
+    │   │   │       ├── CommentResponse.java
+    │   │   │       └── AuditEventResponse.java
+    │   │   │
+    │   │   ├── entity/
+    │   │   │   ├── User.java
+    │   │   │   ├── RequestType.java
+    │   │   │   ├── Request.java
+    │   │   │   ├── RequestComment.java
+    │   │   │   └── RequestAuditEvent.java
+    │   │   │
+    │   │   ├── repository/
+    │   │   │   ├── UserRepository.java
+    │   │   │   ├── RequestTypeRepository.java
+    │   │   │   ├── RequestRepository.java
+    │   │   │   ├── RequestCommentRepository.java
+    │   │   │   └── RequestAuditEventRepository.java
+    │   │   │
+    │   │   ├── service/
+    │   │   │   ├── UserDetailsServiceImpl.java
+    │   │   │   ├── AuthService.java
+    │   │   │   ├── RequestService.java
+    │   │   │   ├── RequestTypeService.java
+    │   │   │   └── UserService.java
+    │   │   │
+    │   │   ├── security/
+    │   │   │   ├── UserPrincipal.java
+    │   │   │   ├── JwtTokenProvider.java
+    │   │   │   └── JwtAuthenticationFilter.java
+    │   │   │
+    │   │   └── exception/
+    │   │       ├── GlobalExceptionHandler.java
+    │   │       ├── ErrorResponse.java
+    │   │       ├── ResourceNotFoundException.java
+    │   │       ├── BadRequestException.java
+    │   │       └── UnauthorizedException.java
+    │   │
+    │   └── resources/
+    │       ├── application.yml
+    │       └── db/migration/
+    │           ├── V1__initial_schema.sql
+    │           └── V2__seed_data.sql
+    │
+    └── test/
+        ├── java/com/opsrequests/
+        │   ├── service/
+        │   │   ├── AuthServiceTest.java
+        │   │   └── RequestServiceTest.java
+        │   │
+        │   └── integration/
+        │       └── RequestWorkflowIntegrationTest.java
+        │
+        └── resources/
+            └── application-test.yml
+
+TOTAL FILES:
+- Java classes: 46
+- Configuration files: 2
+- SQL migrations: 2
+- Test classes: 3
+- Documentation: 3
