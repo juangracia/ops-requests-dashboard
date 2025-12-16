@@ -7,6 +7,7 @@ import com.opsrequests.entity.User;
 import com.opsrequests.exception.BadRequestException;
 import com.opsrequests.repository.UserRepository;
 import com.opsrequests.security.JwtTokenProvider;
+import com.opsrequests.security.UserPrincipal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -103,10 +104,14 @@ class AuthServiceTest {
 
     @Test
     void login_Success() {
+        UserPrincipal userPrincipal = new UserPrincipal(1L, "test@example.com", "encodedPassword",
+                User.Role.EMPLOYEE, null, true);
+
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
                 .thenReturn(authentication);
+        when(authentication.getPrincipal()).thenReturn(userPrincipal);
         when(tokenProvider.generateToken(authentication)).thenReturn("jwt-token");
-        when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
         AuthResponse response = authService.login(loginRequest);
 
