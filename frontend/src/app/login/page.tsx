@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { api } from '@/services/api';
 import { setAuthToken, setCurrentUser } from '@/lib/auth';
+import { getErrorMessage } from '@/lib/utils';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -23,8 +24,8 @@ export default function LoginPage() {
       setAuthToken(response.token);
       setCurrentUser(response.user);
       router.push('/dashboard');
-    } catch (error: any) {
-      setError(error.response?.data?.message || 'Login failed. Please check your credentials.');
+    } catch (error: unknown) {
+      setError(getErrorMessage(error, 'Login failed. Please check your credentials.'));
     } finally {
       setLoading(false);
     }

@@ -28,6 +28,7 @@ public class RequestService {
     private final RequestCommentRepository commentRepository;
     private final RequestAuditEventRepository auditEventRepository;
 
+    @Transactional(readOnly = true)
     public List<RequestResponse> getRequests(UserPrincipal userPrincipal, String statusFilter,
                                               Long typeIdFilter, String priorityFilter) {
         List<Request> requests;
@@ -98,6 +99,7 @@ public class RequestService {
         return mapToRequestResponse(newRequest);
     }
 
+    @Transactional(readOnly = true)
     public RequestDetailResponse getRequestDetail(Long id, UserPrincipal userPrincipal) {
         Request request = requestRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Request not found"));

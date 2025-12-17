@@ -1,3 +1,15 @@
+import axios from 'axios';
+
+export const getErrorMessage = (error: unknown, fallback: string = 'An error occurred'): string => {
+  if (axios.isAxiosError(error)) {
+    return error.response?.data?.message || fallback;
+  }
+  if (error instanceof Error) {
+    return error.message;
+  }
+  return fallback;
+};
+
 export const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
   return date.toLocaleDateString('en-US', {
@@ -9,8 +21,8 @@ export const formatDate = (dateString: string): string => {
   });
 };
 
-export const formatCurrency = (amount?: number): string => {
-  if (!amount) return 'N/A';
+export const formatCurrency = (amount?: number | null): string => {
+  if (amount === null || amount === undefined) return 'N/A';
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
