@@ -17,6 +17,7 @@ A production-ready internal tool for managing operational requests (purchase req
 - [Verification Checklist](#verification-checklist)
 - [Future Improvements](#future-improvements)
 - [Documentation](#documentation)
+- [Production Deployment](#production-deployment)
 - [License](#license)
 
 ## Overview
@@ -38,7 +39,7 @@ This project demonstrates a complete, business-minded approach to building inter
 ## Features
 
 ### Employee Features
-- Register and log in securely
+- Register and log in securely (select role during registration: Employee, Manager, or Admin)
 - Create requests with type, title, description, amount, and priority
 - View and filter personal requests
 - Edit requests while in SUBMITTED status
@@ -222,6 +223,11 @@ JWT_SECRET=your-256-bit-secret-key-here-must-be-at-least-32-chars-long
 
 ## Demo Credentials
 
+### Self-Registration
+Users can register their own accounts and **select their role** (Employee, Manager, or Admin) during registration. This is useful for testing different workflows.
+
+### Seeded Accounts (Local Development)
+
 | Role | Email | Password |
 |------|-------|----------|
 | Admin | admin@example.com | admin123 |
@@ -229,8 +235,15 @@ JWT_SECRET=your-256-bit-secret-key-here-must-be-at-least-32-chars-long
 | Employee 1 | employee1@example.com | employee123 |
 | Employee 2 | employee2@example.com | employee123 |
 
+### Production Test Accounts
+
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | myadmin@test.com | Test123456! |
+| Employee | railwayuser@example.com | Test123456! |
+
 **Seed Data Includes:**
-- 4 request types: PURCHASE, IT_ACCESS, HR, TRAVEL
+- 4 request types: Purchase Request, IT Access Request, HR Request, Travel Request
 - Sample requests in various statuses
 - Audit trail for each status change
 
@@ -416,6 +429,52 @@ ops-requests-dashboard/
 ├── .github/workflows/ci.yml
 └── README.md
 ```
+
+## Production Deployment
+
+The application is deployed on [Railway](https://railway.app) with the following services:
+
+### Live URLs
+
+| Service | URL |
+|---------|-----|
+| Frontend | https://frontend-production-133f.up.railway.app |
+| Backend API | https://backend-production-c3d3.up.railway.app |
+
+### Deployment Architecture
+
+- **Frontend**: Next.js 14 with standalone output, deployed via Dockerfile
+- **Backend**: Spring Boot 3 with Java 17, deployed via Dockerfile
+- **Database**: PostgreSQL 15 managed by Railway
+
+### Deploying Updates
+
+The project uses `railway up` for deployments from the respective directories:
+
+```bash
+# Deploy frontend
+cd frontend
+railway up --service <frontend-service-id>
+
+# Deploy backend
+cd backend
+railway up --service <backend-service-id>
+```
+
+### Environment Variables (Railway)
+
+The following environment variables are configured in Railway:
+
+| Variable | Description |
+|----------|-------------|
+| `DB_HOST` | PostgreSQL internal hostname |
+| `DB_PORT` | PostgreSQL port (5432) |
+| `DB_NAME` | Database name |
+| `DB_USER` | Database username |
+| `DB_PASSWORD` | Database password |
+| `JWT_SECRET` | JWT signing secret |
+| `SERVER_PORT` | Backend server port (8080) |
+| `NEXT_PUBLIC_API_URL` | Backend API URL for frontend |
 
 ## License
 
