@@ -57,6 +57,7 @@ export interface LoginRequest {
 export interface RegisterRequest {
   email: string;
   password: string;
+  role: 'EMPLOYEE' | 'MANAGER' | 'ADMIN';
 }
 
 export interface CreateRequestData {
