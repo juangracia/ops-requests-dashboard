@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import StatusBadge from '@/components/StatusBadge';
@@ -10,7 +10,7 @@ import ApprovalActions from '@/components/ApprovalActions';
 import { getCurrentUser } from '@/lib/auth';
 import { api } from '@/services/api';
 import { RequestDetail, User } from '@/types';
-import { formatDate, formatCurrency } from '@/lib/utils';
+import { formatDate, formatCurrency, getErrorMessage } from '@/lib/utils';
 
 export default function RequestDetailPage() {
   const router = useRouter();
@@ -24,17 +24,7 @@ export default function RequestDetailPage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  useEffect(() => {
-    const currentUser = getCurrentUser();
-    if (!currentUser) {
-      router.push('/login');
-      return;
-    }
-    setUser(currentUser);
-    fetchRequest();
-  }, [router, requestId]);
-
-  const fetchRequest = async () => {
+  const fetchRequest = useCallback(async () => {
     try {
       const data = await api.getRequest(requestId);
       setRequest(data);
@@ -43,7 +33,17 @@ export default function RequestDetailPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [requestId]);
+
+  useEffect(() => {
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+      router.push('/login');
+      return;
+    }
+    setUser(currentUser);
+    fetchRequest();
+  }, [router, fetchRequest]);
 
   const handleAddComment = async (comment: string) => {
     setActionLoading(true);
@@ -53,8 +53,8 @@ export default function RequestDetailPage() {
       setSuccess('Comment added successfully');
       await fetchRequest();
       setTimeout(() => setSuccess(''), 3000);
-    } catch (error: any) {
-      setError(error.response?.data?.message || 'Failed to add comment');
+    } catch (error: unknown) {
+      setError(getErrorMessage(error, 'Failed to add comment'));
     } finally {
       setActionLoading(false);
     }
@@ -68,8 +68,8 @@ export default function RequestDetailPage() {
       setSuccess('Request approved successfully');
       await fetchRequest();
       setTimeout(() => setSuccess(''), 3000);
-    } catch (error: any) {
-      setError(error.response?.data?.message || 'Failed to approve request');
+    } catch (error: unknown) {
+      setError(getErrorMessage(error, 'Failed to approve request'));
     } finally {
       setActionLoading(false);
     }
@@ -83,8 +83,8 @@ export default function RequestDetailPage() {
       setSuccess('Request rejected');
       await fetchRequest();
       setTimeout(() => setSuccess(''), 3000);
-    } catch (error: any) {
-      setError(error.response?.data?.message || 'Failed to reject request');
+    } catch (error: unknown) {
+      setError(getErrorMessage(error, 'Failed to reject request'));
     } finally {
       setActionLoading(false);
     }
@@ -100,8 +100,8 @@ export default function RequestDetailPage() {
       setSuccess('Request cancelled successfully');
       await fetchRequest();
       setTimeout(() => setSuccess(''), 3000);
-    } catch (error: any) {
-      setError(error.response?.data?.message || 'Failed to cancel request');
+    } catch (error: unknown) {
+      setError(getErrorMessage(error, 'Failed to cancel request'));
     } finally {
       setActionLoading(false);
     }
@@ -115,8 +115,8 @@ export default function RequestDetailPage() {
       setSuccess(`Status changed to ${status}`);
       await fetchRequest();
       setTimeout(() => setSuccess(''), 3000);
-    } catch (error: any) {
-      setError(error.response?.data?.message || 'Failed to change status');
+    } catch (error: unknown) {
+      setError(getErrorMessage(error, 'Failed to change status'));
     } finally {
       setActionLoading(false);
     }

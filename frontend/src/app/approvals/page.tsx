@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import RequestCard from '@/components/RequestCard';
@@ -16,16 +16,7 @@ export default function ApprovalsPage() {
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState<RequestFilters>({ status: 'SUBMITTED' });
 
-  useEffect(() => {
-    const user = getCurrentUser();
-    if (!user || user.role !== 'MANAGER') {
-      router.push('/login');
-      return;
-    }
-    fetchData();
-  }, [router, filters]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const [requestsData, typesData] = await Promise.all([
         api.getRequests(filters),
@@ -38,7 +29,16 @@ export default function ApprovalsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
+
+  useEffect(() => {
+    const user = getCurrentUser();
+    if (!user || user.role !== 'MANAGER') {
+      router.push('/login');
+      return;
+    }
+    fetchData();
+  }, [router, fetchData]);
 
   return (
     <div className="min-h-screen bg-gray-50">

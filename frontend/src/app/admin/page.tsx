@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
@@ -17,16 +17,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState<RequestFilters>({});
 
-  useEffect(() => {
-    const user = getCurrentUser();
-    if (!user || user.role !== 'ADMIN') {
-      router.push('/login');
-      return;
-    }
-    fetchData();
-  }, [router, filters]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const [requestsData, typesData] = await Promise.all([
         api.getRequests(filters),
@@ -39,7 +30,16 @@ export default function AdminPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
+
+  useEffect(() => {
+    const user = getCurrentUser();
+    if (!user || user.role !== 'ADMIN') {
+      router.push('/login');
+      return;
+    }
+    fetchData();
+  }, [router, fetchData]);
 
   return (
     <div className="min-h-screen bg-gray-50">
